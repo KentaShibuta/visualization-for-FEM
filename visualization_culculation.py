@@ -1,8 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from pandas.plotting import scatter_matrix
 
-df = pd.read_csv('filename.csv',header=None)
+df = pd.read_csv('mesh04.csv',header=None)
 pd.DataFrame(df)
 df.columns = ['x', 'y']
 print(df)
