@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df = pd.read_csv('mesh08.csv',header=None)
+df = pd.read_csv('filename.csv',header=None)
 x_element = 40#メッシュの分割数によって変更する
 y_element = 40#メッシュの分割数によって変更する
 x_node = x_element + 1
