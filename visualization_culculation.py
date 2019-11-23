@@ -1,25 +1,33 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import sys
 
-df = pd.read_csv('filename.csv',header=None)
-x_element = 40#メッシュの分割数によって変更する
-y_element = 40#メッシュの分割数によって変更する
-x_node = x_element + 1
-y_node = y_element + 1
-nnode = x_node * y_node
-pd.DataFrame(df)
-df.columns = ['x', 'y']
+print('Input node file name >>>>')
+f_name_node = input() # 可視化するファイル名
+
+df_node = pd.read_csv(f_name_node ,header=None)
+nnode = len(df_node)
+print('# nnode = ' + str(nnode))
+pd.DataFrame(df_node)
+df_node.columns = ['node_id', 'x', 'y']
 plt.xlabel('x')
 plt.ylabel('y')
-plt.title('visualization mesh')
-#print(df)
-#print(df.at[(0, "y")])
-#print(df.at[(2, "y")])#検証用
-#plt.scatter(df['x'],df['y'])#ここを入れると節点が強調して表示される．
+#plt.title('visualization mesh') # これが有ると画像を見ただけでなんのでグラフなのかわかるので便利だが，論文に貼るときにいらない．
+#print(df_node)
+#plt.scatter(df_node['x'],df_node['y'])#ここを入れると節点が強調して表示される．
 
-for i in range(nnode - 1):
-    if df.at[(i, "x")] < df.at[(i+1, "x")]:
-        plt.plot([df.at[(i, "x")], df.at[(i+1, "x")]], [df.at[(i, "y")], df.at[(i+1, "y")]],'k-', lw=0.7)
-for i in range(nnode - y_node):
-    plt.plot([df.at[(i, "x")], df.at[(i+y_node, "x")]], [df.at[(i, "y")], df.at[(i+y_node, "y")]],'k-', lw=0.7)
+print('Input nbool file name >>>>')
+f_name_nbool = input() # 可視化するファイル名
+
+df_nbool = pd.read_csv(f_name_nbool ,header=None)
+nelem = len(df_nbool)
+pd.DataFrame(df_nbool)
+df_nbool.columns = ['elem_id', 'matel_id', 'mesh_type', 'local_0', 'local_1', 'local_2', 'local_3']
+
+for i in range(nelem):
+    plt.plot([df_node.at[(int(df_nbool.iloc[i][3]), "x")], df_node.at[(int(df_nbool.iloc[i][4]), "x")]], [df_node.at[(int(df_nbool.iloc[i][3]), "y")], df_node.at[(int(df_nbool.iloc[i][4]), "y")]],'k-', lw=0.7)
+    plt.plot([df_node.at[(int(df_nbool.iloc[i][4]), "x")], df_node.at[(int(df_nbool.iloc[i][5]), "x")]], [df_node.at[(int(df_nbool.iloc[i][4]), "y")], df_node.at[(int(df_nbool.iloc[i][5]), "y")]],'k-', lw=0.7)
+    plt.plot([df_node.at[(int(df_nbool.iloc[i][5]), "x")], df_node.at[(int(df_nbool.iloc[i][6]), "x")]], [df_node.at[(int(df_nbool.iloc[i][5]), "y")], df_node.at[(int(df_nbool.iloc[i][6]), "y")]],'k-', lw=0.7)
+    plt.plot([df_node.at[(int(df_nbool.iloc[i][6]), "x")], df_node.at[(int(df_nbool.iloc[i][3]), "x")]], [df_node.at[(int(df_nbool.iloc[i][6]), "y")], df_node.at[(int(df_nbool.iloc[i][3]), "y")]],'k-', lw=0.7)
+
 plt.show()
