@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import sys
 
 print('Input node file name >>>>')
-f_name_node = input() # 可視化するファイル名
+f_name_node = input().rstrip() # 可視化するファイル名
 
 df_node = pd.read_csv(f_name_node ,header=None)
 nnode = len(df_node)
@@ -17,7 +17,7 @@ plt.ylabel('y')
 #plt.scatter(df_node['x'],df_node['y'])#ここを入れると節点が強調して表示される．
 
 print('Input nbool file name >>>>')
-f_name_nbool = input() # 可視化するファイル名
+f_name_nbool = input().rstrip() # 可視化するファイル名
 
 df_nbool = pd.read_csv(f_name_nbool ,header=None)
 nelem = len(df_nbool)
@@ -29,5 +29,5 @@ for i in range(nelem):
     plt.plot([df_node.at[(int(df_nbool.iloc[i][4]), "x")], df_node.at[(int(df_nbool.iloc[i][5]), "x")]], [df_node.at[(int(df_nbool.iloc[i][4]), "y")], df_node.at[(int(df_nbool.iloc[i][5]), "y")]],'k-', lw=0.7)
     plt.plot([df_node.at[(int(df_nbool.iloc[i][5]), "x")], df_node.at[(int(df_nbool.iloc[i][6]), "x")]], [df_node.at[(int(df_nbool.iloc[i][5]), "y")], df_node.at[(int(df_nbool.iloc[i][6]), "y")]],'k-', lw=0.7)
     plt.plot([df_node.at[(int(df_nbool.iloc[i][6]), "x")], df_node.at[(int(df_nbool.iloc[i][3]), "x")]], [df_node.at[(int(df_nbool.iloc[i][6]), "y")], df_node.at[(int(df_nbool.iloc[i][3]), "y")]],'k-', lw=0.7)
-
+plt.axes().set_aspect('equal', 'datalim')
 plt.show()
