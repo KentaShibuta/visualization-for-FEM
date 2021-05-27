@@ -25,9 +25,9 @@
 * Python 3.8.5
 * Cython version 0.29.23
 * matplotlib 3.3.1
-# cythonをインストール
+### cythonをインストール
 * `pip3 install cython`
-# 可視化プログラムを実行
+### 可視化プログラムを実行
 * `cythonize -i visualization_culculation.pyx`
     + カレントディレクトリに.soファイルが生成される
 * `python3 run.py`
