@@ -1,4 +1,5 @@
 # 計算格子の可視化プログラム
+2021.5.27 last updated
 ## できること
 * 計算格子の形状の可視化ができる．
     + 現在は2次元での可視化のみ．
@@ -19,9 +20,18 @@
         + 同様に，「要素と節点の依存関係のデータ」が書かれている行を複数行まとめて`# nbool_start`と`# nbool_end`で囲む．
         + `sh convert_inp_csv.sh`で実行をして，inpファイルからデータのトリミングが行える．
 ## 実行方法
-* 可視化プログラムを実行
-    + `python visualization_culculation.py`
-* "Input node file name >>>>"に続けて，節点座標のデータが記述されたファイルのパスを入力．
-* "Input nbool file name >>>>"に続けて，要素と節点の依存関係を示すデータが記述されたファイルのパスを入力．
+動作保証環境
+* macOS 10.15.7
+* Python 3.8.5
+* Cython version 0.29.23
+* matplotlib 3.3.1
+cythonをインストール
+* `pip3 install cython`
+可視化プログラムを実行
+* `cythonize -i visualization_culculation.pyx`
+    + カレントディレクトリに.soファイルが生成される
+* `python3 run.py`
+    + "Input node file name >>>>"に続けて，節点座標のデータが記述されたファイルのパスを入力
+    + "Input nbool file name >>>>"に続けて，要素と節点の依存関係を示すデータが記述されたファイルのパスを入力
 ### 実行例
 ![実行例](https://gyazo.com/5c5a0c1a2f222659b5228cc1afa3c9aa/raw)
